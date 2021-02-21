@@ -18,6 +18,8 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "secret_config.h"
+
 //version and sources location
 #define FW_VERSION "2.1.1.b10"
 #define REPOSITORY "https://github.com/luc-github/ESP3D"
@@ -365,12 +367,19 @@ typedef enum {
 
 #define LAST_EEPROM_ADDRESS 983
 
+#ifndef S_DEFAULT_WIFI_AP_PASSWORD
+    #define S_DEFAULT_WIFI_AP_PASSWORD "12345678"
+#endif
+#ifndef S_DEFAULT_WIFI_STA_PASSWORD
+    #define S_DEFAULT_WIFI_STA_PASSWORD "12345678"
+#endif
+
 //default values
 #define DEFAULT_WIFI_MODE           AP_MODE
 const char DEFAULT_AP_SSID []  PROGMEM =        "ESP3D";
-const char DEFAULT_AP_PASSWORD [] PROGMEM = "12345678";
+const char DEFAULT_AP_PASSWORD [] PROGMEM = S_DEFAULT_WIFI_AP_PASSWORD;
 const char DEFAULT_STA_SSID []  PROGMEM =       "ESP3D";
-const char DEFAULT_STA_PASSWORD [] PROGMEM =    "12345678";
+const char DEFAULT_STA_PASSWORD [] PROGMEM =    S_DEFAULT_WIFI_STA_PASSWORD;
 const byte DEFAULT_STA_IP_MODE  =               DHCP_MODE;
 const byte DEFAULT_AP_IP_MODE =                 STATIC_IP_MODE;
 const byte DEFAULT_IP_VALUE[]   =           {192, 168, 0, 1};
@@ -386,8 +395,16 @@ const long DEFAULT_BAUD_RATE =          115200;
 #define DEFAULT_BEACON_INTERVAL         100
 const int DEFAULT_WEB_PORT =            80;
 const int DEFAULT_DATA_PORT =           8888;
-const char DEFAULT_ADMIN_PWD []  PROGMEM =  "admin";
-const char DEFAULT_USER_PWD []  PROGMEM =   "user";
+
+#ifndef S_DEFAULT_USER_PASSWORD
+    #define S_DEFAULT_USER_PASSWORD "user"
+#endif
+#ifndef S_DEFAULT_ADMIN_PASSWORD
+    #define S_DEFAULT_ADMIN_PASSWORD "admin"
+#endif
+
+const char DEFAULT_ADMIN_PWD []  PROGMEM =  S_DEFAULT_USER_PASSWORD;
+const char DEFAULT_USER_PWD []  PROGMEM =   S_DEFAULT_ADMIN_PASSWORD;
 const char DEFAULT_ADMIN_LOGIN []  PROGMEM =    "admin";
 const char DEFAULT_USER_LOGIN []  PROGMEM = "user";
 const char DEFAULT_TIME_SERVER1 []  PROGMEM =   "1.pool.ntp.org";
